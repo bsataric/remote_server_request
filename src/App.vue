@@ -1,12 +1,28 @@
+/* eslint-disable prettier/prettier */
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <Home :keyCloakToken="keycloak" />
   </div>
 </template>
+
+<script lang="ts">
+import Home from './views/Home.vue'
+
+import { Component, Vue, Prop } from 'vue-property-decorator'
+
+@Component({
+  components: {
+    Home,
+  },
+})
+export default class App extends Vue {
+  @Prop(Object) readonly keycloak: Record<string, any> | undefined
+
+  created() {
+    //console.log('KEYCLOAK' + JSON.stringify(this.keycloak))
+  }
+}
+</script>
 
 <style>
 #app {

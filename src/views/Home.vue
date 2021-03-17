@@ -5,16 +5,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+import { Component, Vue, Watch, Prop } from 'vue-property-decorator'
 import axios from 'axios'
 
-@Component({
-  components: {
-    HelloWorld,
-  },
-})
+@Component({})
 export default class Home extends Vue {
+  @Prop(Object) readonly keyCloakToken: Record<string, any> | undefined
+
   @Watch('events')
   onEventsReceived(val: any, oldVal: any) {
     this.output = val
@@ -24,6 +21,7 @@ export default class Home extends Vue {
   private output: any = null
 
   created() {
+    console.log('HOME RECEIVED KEYTOKEN: ' + JSON.stringify(this.keyCloakToken))
     axios
       .get('http://localhost:3000/events')
       .then((response) => {
