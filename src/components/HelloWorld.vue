@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <treeselect :options="options" />
+    <treeselect :options="options" :always-open="true" />
   </div>
 </template>
 <script>
@@ -36,7 +36,7 @@ export default {
   },
 
   created() {
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 5000; i++) {
       this.options[0].children.push({
         id: i,
         label: i,
