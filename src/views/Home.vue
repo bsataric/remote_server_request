@@ -1,7 +1,9 @@
 <template>
-  <div class="home">
-    {{ output }}
-  </div>
+  <v-app>
+    <!--    <div class="home">
+      <v-treeview :items="items"></v-treeview>
+    </div> -->
+  </v-app>
 </template>
 
 <script lang="ts">

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import Keycloak from 'keycloak-js'
+import vuetify from '@/plugins/vuetify' // path to vuetify export
 
 Vue.config.productionTip = false
 
@@ -20,6 +21,8 @@ const initOptions = {
 
 const keycloak = Keycloak(initOptions)
 
+console.log('KEYCLOAK BEFORE: ' + JSON.stringify(keycloak))
+
 keycloak
   .init({ onLoad: 'login-required', flow: 'implicit' })
   .then((auth) => {
@@ -29,6 +32,7 @@ keycloak
       Vue.set(store, 'token', keycloak.token)
       new Vue({
         store,
+        vuetify,
         render: (h) => h(App, { props: { keycloak: keycloak } }),
       }).$mount('#app')
     }
